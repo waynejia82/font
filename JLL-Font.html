@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			@font-face {
+				font-family: "JLL Hand";
+				src: url("jll_hand-webfont.woff") format("woff"),
+					 url("jll_hand-webfont.woff2") format("woff2"),
+					 url("jll_hand-webfont.eot") format("eot");
+			}
+		</style>
+	</head>
+	<body>
+		<span style="font-family:'JLL Hand';">&nbsp</span>
+		<input id="textbox" style="border:1px solid #d3d3d3;margin-top:20px;width:502px;height:30px;" />
+		<button id="generate" style="width:100px;height:34px;" onclick="genText()">Generate</button>
+		
+		<div>
+			<span style="font-family:'JLL Hand';">&nbsp</span>
+			<span>Font Size</span>
+			<input id="fontsize" value="64" style="border:1px solid #d3d3d3;width:30px;height:30px;margin-top:10px;text-align:center;"/>
+			<span>px</span>
+			<span style="margin-left:20px;">Color:</span>
+			<select id="fontColor" style="height:30px;">
+				<option value="Black">Black</option>
+				<option value="White">White</option>
+				<option value="Red">JLL Red</option>
+				<option value="Steel">Steel</option>
+				<option value="Conrete">Conrete</option>
+				<option value="Stone">Stone</option>
+			</select>
+			<span style="margin-left:20px;">Style:</span>
+			<span>Bold</span>
+			<input type="checkbox" id="styleb" />
+			<span>Italic</span>
+			<input type="checkbox" id="stylei" />
+		</div>
+		<div></div>
+		<span style="font-family:'JLL Hand';">&nbsp</span>
+		<canvas id=showText width="1000" height="600" style="background:rgba(255,255,255,0);border:1px solid #d3d3d3;margin-top:20px;">
+		
+		</canvas>
+		<script>
+			window.onload=function(){
+				var ctx=document.getElementById("showText").getContext("2d");
+				ctx.font="30px 'JLL Hand'";
+				ctx.fillText("Hello World",10,64);
+			}
+			function genText(){
+				var c=document.getElementById("showText")
+				var ctx=c.getContext("2d");
+				var fSize=document.getElementById("fontsize").value;
+				var colorValue=document.getElementById("fontColor").value;
+				var ifB=document.getElementById("styleb").checked;
+				var ifI=document.getElementById("stylei").checked;
+				var fontColor;
+				switch(colorValue){
+					case "Black":
+					fontColor="#000";
+					break;
+					case "White":
+					fontColor="#FFF";
+					break;
+					case "Red":
+					fontColor="#E30613";
+					break;
+					case "Steel":
+					fontColor="#626468";
+					break;
+					case "Concrete":
+					fontColor="#B1B2B4";
+					break;
+					case "Stone":
+					fontColor="#DBD6C7"
+					break;
+				}
+				var fontString=fSize.toString() + "px 'JLL Hand'";
+				if(ifB){
+					fontString="bold " + fontString;
+				}
+				if(ifI){
+					fontString="italic " + fontString;
+				}
+				c.height=c.height;
+				ctx.fillStyle=fontColor;
+				ctx.font=fontString;
+				ctx.fillText(document.getElementById("textbox").value, 10, fSize);
+			}
+		</script>
+	</body>
+</html>
